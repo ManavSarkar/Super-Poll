@@ -31,8 +31,8 @@ app.use("/user", userRoute);
 app.use("/poll", pollRoute);
 
 // listening to port
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
+app.use(express.static("client/build"));
+if (process.env.NODE_ENV == "production") {
 }
 app.listen(port, () => {
   console.log(`listening to ${port}`);
