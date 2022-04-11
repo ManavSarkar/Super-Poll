@@ -10,7 +10,9 @@ const pollRoute = require("./routes/poll");
 
 require("dotenv").config();
 const database = require("./database/db-conn");
-
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("./client/build"));
+}
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: true }));
 app.use(cookieParser());
@@ -31,9 +33,7 @@ app.use("/user", userRoute);
 app.use("/poll", pollRoute);
 
 // listening to port
-app.use(express.static("./client/build"));
-if (process.env.NODE_ENV == "production") {
-}
+
 app.listen(port, () => {
   console.log(`listening to ${port}`);
 });
