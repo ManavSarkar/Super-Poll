@@ -20,19 +20,20 @@ app.use(cookieParser());
 
 // Home Route
 
-app.use("/user", userRoute);
-
-app.use("/poll", pollRoute);
-
 const path = require("path");
 
 // Step 1:
+app.use("/user", userRoute);
+
+app.use("/poll", pollRoute);
 app.use(express.static(path.resolve(__dirname, "./client/build")));
 // Step 2:
 app.get("*", function (request, response) {
   response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
-
+app.get("/", (req, res) => {
+  res.send("Home");
+});
 // listening to port
 
 app.listen(port, () => {
