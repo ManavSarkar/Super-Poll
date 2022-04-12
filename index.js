@@ -10,16 +10,13 @@ const pollRoute = require("./routes/poll");
 
 require("dotenv").config();
 const database = require("./database/db-conn");
-if (process.env.NODE_ENV == "production") {
-  app.use(express.static("./client/build"));
-}
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: true }));
 app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
     methods: "GET,POST,PUT,DELETE",
     credentials: true,
   })
@@ -31,6 +28,15 @@ app.use(
 app.use("/user", userRoute);
 
 app.use("/poll", pollRoute);
+
+const path = require("path");
+
+// Step 1:
+app.use(express.static(path.resolve(__dirname, "./client/build")));
+// Step 2:
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
+});
 
 // listening to port
 
