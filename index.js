@@ -9,18 +9,13 @@ const userRoute = require("./routes/user");
 const pollRoute = require("./routes/poll");
 
 require("dotenv").config();
+app.use(cors());
 const database = require("./database/db-conn");
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: true }));
 app.use(cookieParser());
 
-app.use(
-  cors({
-    methods: "GET,POST,PUT,DELETE",
-    credentials: true,
-  })
-);
 // Page Routes
 
 // Home Route
