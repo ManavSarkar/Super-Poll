@@ -26,14 +26,10 @@ const path = require("path");
 app.use("/user", userRoute);
 
 app.use("/poll", pollRoute);
-app.use(express.static(path.resolve(__dirname, "./client/build")));
+// app.use(express.static(path.resolve(__dirname, "./client/build")));
 // Step 2:
-app.get("*", function (request, response) {
-  response.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
-});
-app.get("/", (req, res) => {
-  res.send("Home");
-});
+app.use("*", express.static(path.join(__dirname, "client", "build")));
+
 // listening to port
 
 app.listen(port, () => {
