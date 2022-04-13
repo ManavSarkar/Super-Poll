@@ -1,16 +1,14 @@
 const router = require("express")();
 const Poll = require("./../models/poll_model");
 const User = require("./../models/user_model");
-router.get("/newpoll", (req, res) => {
-  res.send("You're going to create a new poll");
-});
-router.get("/public", async (req, res) => {
-  var polls = await Poll.find({ visibility: 0 }).limit(10);
-  var p = "";
-  polls.forEach((e) => (p += JSON.stringify(e)));
 
-  res.send(JSON.stringify(polls));
-});
+// router.get("/public", async (req, res) => {
+//   var polls = await Poll.find({ visibility: 0 }).limit(10);
+//   var p = "";
+//   polls.forEach((e) => (p += JSON.stringify(e)));
+
+//   res.send(JSON.stringify(polls));
+// });
 router.post("/newpoll", (req, res) => {
   var poll = new Poll({
     questions: req.body.questions,
@@ -31,7 +29,7 @@ router.post("/newpoll", (req, res) => {
   });
 });
 
-router.get("/getPoll/:id", async (req, res) => {
+router.post("/getPoll/:id", async (req, res) => {
   var poll = await Poll.findOne({ shortId: req.params.id });
 
   res.status(poll === null ? 500 : 200).send(poll);

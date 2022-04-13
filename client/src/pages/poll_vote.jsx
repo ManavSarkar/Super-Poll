@@ -24,7 +24,12 @@ const PollVote = () => {
     } else {
       setUser(loggedIn[1]);
 
-      let res = await fetch("/poll/getPoll/" + params.id);
+      let res = await fetch("/poll/getPoll/" + params.id, {
+        method: "post",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
       if (res.status !== 200) {
         alert(

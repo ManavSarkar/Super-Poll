@@ -21,7 +21,12 @@ const PollResult = () => {
         state: { prevPath: "/poll/result/" + params.id },
       });
     }
-    fetch("/poll/getPoll/" + params.id)
+    fetch("/poll/getPoll/" + params.id, {
+      method: "post",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => {
         if (res.status !== 200) {
           alert(

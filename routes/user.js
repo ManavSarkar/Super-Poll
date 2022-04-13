@@ -4,12 +4,7 @@ const User = require("./../models/user_model");
 const jwt = require("jsonwebtoken");
 const authenticate = require("./../middlewares/authenticate");
 const Poll = require("../models/poll_model");
-router.get("/", (req, res) => {
-  res.redirect("/user/dashboard");
-});
-router.get("/signup", (req, res) => {
-  res.send("want to signup");
-});
+
 router.post("/signup", async (req, res) => {
   var user = new User({
     name: req.body.name,
@@ -57,9 +52,7 @@ router.post("/checkemail", (req, res) => {
   });
 });
 // Login route
-router.get("/login", (req, res) => {
-  res.send(`login p[age]`);
-});
+
 router.post("/logout", (req, res) => {
   res.clearCookie(process.env.AUTH_COOKIE);
   res.status(200).json({ success: true });
@@ -132,7 +125,7 @@ router.post("/login", async (req, res) => {
   // res.send("Welcome to our platform, start your elections!");
 });
 // Dashboard
-router.get("/dashboard", authenticate, (req, res) => {
+router.post("/dashboard", authenticate, (req, res) => {
   res.send(req.user);
 });
 

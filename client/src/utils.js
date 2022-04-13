@@ -1,8 +1,7 @@
 export default class Utils {
- 
   checkLogin = async () => {
     let res = await fetch("/user/dashboard", {
-      method: "get",
+      method: "post",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
