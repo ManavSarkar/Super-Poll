@@ -8,6 +8,7 @@
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
     "@testing-library/user-event": "^13.5.0",
+    "backend": "file:..",
     "chart.js": "^3.7.1",
     "randomcolor": "^0.6.2",
     "react": "^17.0.2",
